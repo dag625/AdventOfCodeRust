@@ -1,26 +1,34 @@
-mod day1;
+#[macro_use] extern crate lazy_static;
+
+mod aoc2020;
 mod utilities;
 
 use std::env;
 
-type ChallengeFunction = fn(&std::path::Path) -> utilities::Result;
+type ChallengeFunction = fn(&std::path::Path) -> anyhow::Result<()>;
 
 struct Challenge {
+    year: i32,
     day: i32,
     num: i32,
     function: ChallengeFunction
 }
 
 impl Challenge {
-    pub fn matches(&self, rday: i32, rnum: i32) -> bool {
-        if rday <= 0 {
+    pub fn matches(&self, ryear: i32, rday: i32, rnum: i32) -> bool {
+        if ryear <= 0 {
             true
         }
-        else if rday == self.day {
-            if rnum <= 0 || rnum == self.num {
+        else if ryear == self.year {
+            if rday <= 0 {
                 true
-            }
-            else {
+            } else if rday == self.day {
+                if rnum <= 0 || rnum == self.num {
+                    true
+                } else {
+                    false
+                }
+            } else {
                 false
             }
         }
@@ -38,16 +46,26 @@ impl Challenge {
     }
 
     pub fn to_string(&self) -> String {
-        format!("Day {} - Challenge {}", self.day, self.num)
+        format!("Year {} - Day {} - Challenge {}", self.year, self.day, self.num)
     }
 }
 
 const CHALLENGES: &[Challenge] = &[
-    Challenge{ day: 1, num: 1, function: day1::solve_day_1_1},
-    Challenge{ day: 1, num: 2, function: day1::solve_day_1_2}
+    Challenge{ year: 2020, day: 1, num: 1, function: aoc2020::day1::solve_1},
+    Challenge{ year: 2020, day: 1, num: 2, function: aoc2020::day1::solve_2},
+    Challenge{ year: 2020, day: 2, num: 1, function: aoc2020::day2::solve_1},
+    Challenge{ year: 2020, day: 2, num: 2, function: aoc2020::day2::solve_2},
+    Challenge{ year: 2020, day: 3, num: 1, function: aoc2020::day3::solve_1},
+    Challenge{ year: 2020, day: 3, num: 2, function: aoc2020::day3::solve_2},
+    Challenge{ year: 2020, day: 4, num: 1, function: aoc2020::day4::solve_1},
+    Challenge{ year: 2020, day: 4, num: 2, function: aoc2020::day4::solve_2},
+    Challenge{ year: 2020, day: 5, num: 1, function: aoc2020::day5::solve_1},
+    Challenge{ year: 2020, day: 5, num: 2, function: aoc2020::day5::solve_2},
+    Challenge{ year: 2020, day: 6, num: 1, function: aoc2020::day6::solve_1},
+    Challenge{ year: 2020, day: 6, num: 2, function: aoc2020::day6::solve_2}
 ];
 
-fn main_impl() -> utilities::Result {
+fn main_impl() -> std::result::Result<(), String> {
     let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
         return Err("Need directory containing input files.".to_string());
@@ -60,16 +78,20 @@ fn main_impl() -> utilities::Result {
         return Err(format!("Input directory '{}' is not a directory.", input_dir.to_str().unwrap_or_default()));
     }
 
-    let mut day = 0;
+    let mut year = 0;
     if args.len() > 2 {
-        day = args[2].parse::<i32>().map_err(|e| format!("{}", e))?;
+        year = args[2].parse::<i32>().map_err(|e| format!("{}", e))?;
+    }
+    let mut day = 0;
+    if args.len() > 3 {
+        day = args[3].parse::<i32>().map_err(|e| format!("{}", e))?;
     }
     let mut chal = 0;
-    if args.len() > 3 {
-        chal = args[3].parse::<i32>().map_err(|e| format!("{}", e))?;
+    if args.len() > 4 {
+        chal = args[4].parse::<i32>().map_err(|e| format!("{}", e))?;
     }
 
-    CHALLENGES.iter().filter(|c| c.matches(day, chal)).map(|c| c.run(input_dir)).for_each(|_c| {});
+    CHALLENGES.iter().filter(|c| c.matches(year, day, chal)).map(|c| c.run(input_dir)).for_each(|_c| {});
 
     Ok(())
 }

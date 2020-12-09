@@ -4,6 +4,7 @@ mod aoc2020;
 mod utilities;
 
 use std::env;
+use std::time::Instant;
 
 type ChallengeFunction = fn(&std::path::Path) -> anyhow::Result<()>;
 
@@ -95,7 +96,11 @@ fn main_impl() -> std::result::Result<(), String> {
         chal = args[4].parse::<i32>().map_err(|e| format!("{}", e))?;
     }
 
+    let start = Instant::now();
     CHALLENGES.iter().filter(|c| c.matches(year, day, chal)).map(|c| c.run(input_dir)).for_each(|_c| {});
+    let duration = start.elapsed();
+
+    println!("Finished solutions in:  {:?}", duration);
 
     Ok(())
 }

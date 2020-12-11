@@ -39,11 +39,14 @@ impl Challenge {
     }
 
     pub fn run(&self, input_dir: &std::path::Path) {
+        let start = Instant::now();
         println!("{}", self.to_string());
         match (self.function)(input_dir) {
             Ok(()) => {},
             Err(err) => { println!("\t{} failed due to an error:  {}", self.to_string(), err); }
-        }
+        };
+        let duration = start.elapsed();
+        println!("\tChallenge time:  {:?}", duration);
     }
 
     pub fn to_string(&self) -> String {

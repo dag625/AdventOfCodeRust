@@ -2,8 +2,7 @@ use std::path::Path;
 use std::fmt::Display;
 use std::vec::Vec;
 use super::super::utilities;
-use anyhow::{Result, Context};
-use itertools::Itertools;
+use anyhow::Result;
 use crate::aoc2021::day2::Direction::Forward;
 
 pub fn solve_1(input_dir: &Path) -> Result<()> {

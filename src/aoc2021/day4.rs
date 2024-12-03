@@ -7,16 +7,16 @@
 //use Square::Uncalled;
 //use Square::Called;
 //
-// pub fn solve_1(input_dir: &Path) -> Result<()> {
-//     solve(solve_1_impl, input_dir)
+// pub fn solve_1(input_file: &Path) -> Result<()> {
+//     solve(solve_1_impl, input_file)
 // }
 //
-// pub fn solve_2(input_dir: &Path) -> Result<()> {
-//     solve(solve_2_impl, input_dir)
+// pub fn solve_2(input_file: &Path) -> Result<()> {
+//     solve(solve_2_impl, input_file)
 // }
 //
-// fn solve<R: Display>(func: fn((Vec<u8>, Vec<Board>)) -> R, input_dir: &Path) -> Result<()> {
-//     let res = func(get_input(input_dir)?);
+// fn solve<R: Display>(func: fn((Vec<u8>, Vec<Board>)) -> R, input_file: &Path) -> Result<()> {
+//     let res = func(get_input(input_file)?);
 //     println!("\t{}", res);
 //     Ok(())
 // }
@@ -82,8 +82,8 @@
 //     }
 // }
 //
-// fn get_input(input_dir: &Path) -> Result<(Vec<u8>, Vec<Board>)> {
-//     let lines = utilities::get_input_lines(input_dir.join("2021").join("day_4_input.txt"))?;
+// fn get_input(input_file: &Path) -> Result<(Vec<u8>, Vec<Board>)> {
+//     let lines = utilities::get_input_lines(input_file)?;
 //     let numbers = lines[0].split(',').into_iter().map(|s| s.parse().unwrap()).collect();
 //     let mut boards: Vec<Board> = Vec::new();
 //     let mut row: usize = 0;

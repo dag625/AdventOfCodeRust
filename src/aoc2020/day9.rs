@@ -2,8 +2,8 @@ use anyhow::{Result, Context};
 use std::path::Path;
 use crate::utilities;
 
-fn get_input(input_dir: &Path) -> Result<Vec<i64>> {
-    let lines = utilities::get_input_lines(input_dir.join("2020").join("day_9_input.txt"))?;
+fn get_input(input_file: &Path) -> Result<Vec<i64>> {
+    let lines = utilities::get_input_lines(input_file)?;
     lines.iter().map(|s| s.parse().with_context(|| format!("Failed to convert line '{}' to an integer.", s))).collect()
 }
 
@@ -50,15 +50,15 @@ fn find_sum_range(data: &Vec<i64>, sum: i64) -> Result<i64> {
 }
 
 /************************* Part 1 *************************/
-pub fn solve_1(input_dir: &Path) -> Result<()> {
-    let data = get_input(input_dir)?;
+pub fn solve_1(input_file: &Path) -> Result<()> {
+    let data = get_input(input_file)?;
     println!("\t{}", find_first_invalid(&data)?);
     Ok(())
 }
 
 /************************* Part 2 *************************/
-pub fn solve_2(input_dir: &Path) -> Result<()> {
-    let data = get_input(input_dir)?;
+pub fn solve_2(input_file: &Path) -> Result<()> {
+    let data = get_input(input_file)?;
     let sum = find_first_invalid(&data)?;
     println!("\t{}", find_sum_range(&data, sum)?);
     Ok(())

@@ -31,8 +31,8 @@ fn parse_bag_type(s: &str) -> Result<BagType> {
     Ok(BagType{name: n, reqs: req_list})
 }
 
-fn get_input(input_dir: &Path) -> Result<Vec<BagType>> {
-    let lines = utilities::get_input_lines(input_dir.join("2020").join("day_7_input.txt"))?;
+fn get_input(input_file: &Path) -> Result<Vec<BagType>> {
+    let lines = utilities::get_input_lines(input_file)?;
     lines.iter().map(|s| parse_bag_type(s).with_context(|| format!("Failed to convert line '{}' to a bag type description.", s))).collect()
 }
 
@@ -59,15 +59,15 @@ fn count_descendants(bags: &Vec<BagType>, name: &str) -> Result<i64> {
 }
 
 /************************* Part 1 *************************/
-pub fn solve_1(input_dir: &Path) -> Result<()> {
-    let bags = get_input(input_dir)?;
+pub fn solve_1(input_file: &Path) -> Result<()> {
+    let bags = get_input(input_file)?;
     println!("\t{}", get_root_ancestors(&bags, "shiny gold").len());
     Ok(())
 }
 
 /************************* Part 2 *************************/
-pub fn solve_2(input_dir: &Path) -> Result<()> {
-    let bags = get_input(input_dir)?;
+pub fn solve_2(input_file: &Path) -> Result<()> {
+    let bags = get_input(input_file)?;
     println!("\t{}", count_descendants(&bags, "shiny gold")?);
     Ok(())
 }

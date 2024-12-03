@@ -12,8 +12,8 @@ fn count_bits(v: u32) -> u32 {
     retval
 }
 
-fn get_input(input_dir: &Path) -> Result<Vec<Vec<u32>>> {
-    let lines = utilities::get_input_lines(input_dir.join("2020").join("day_6_input.txt"))?;
+fn get_input(input_file: &Path) -> Result<Vec<Vec<u32>>> {
+    let lines = utilities::get_input_lines(input_file)?;
     let mut group = Vec::new();
     let mut retval = Vec::new();
     for s in lines {
@@ -38,16 +38,16 @@ fn get_input(input_dir: &Path) -> Result<Vec<Vec<u32>>> {
 }
 
 /************************* Part 1 *************************/
-pub fn solve_1(input_dir: &Path) -> Result<()> {
-    let answers = get_input(input_dir)?;
+pub fn solve_1(input_file: &Path) -> Result<()> {
+    let answers = get_input(input_file)?;
     let sum: u32 = answers.iter().map(|g| count_bits(g.iter().fold(0u32, |acc, i| acc | i))).sum();
     println!("\t{}", sum);
     Ok(())
 }
 
 /************************* Part 2 *************************/
-pub fn solve_2(input_dir: &Path) -> Result<()> {
-    let answers = get_input(input_dir)?;
+pub fn solve_2(input_file: &Path) -> Result<()> {
+    let answers = get_input(input_file)?;
     let sum: u32 = answers.iter().map(|g| count_bits(g.iter().fold(0xffffffffu32, |acc, i| acc & i))).sum();
     println!("\t{}", sum);
     Ok(())

@@ -5,12 +5,12 @@ use super::super::utilities;
 use anyhow::Result;
 use crate::aoc2021::day2::Direction::Forward;
 
-pub fn solve_1(input_dir: &Path) -> Result<()> {
-    solve(solve_1_impl, input_dir)
+pub fn solve_1(input_file: &Path) -> Result<()> {
+    solve(solve_1_impl, input_file)
 }
 
-pub fn solve_2(input_dir: &Path) -> Result<()> {
-    solve(solve_2_impl, input_dir)
+pub fn solve_2(input_file: &Path) -> Result<()> {
+    solve(solve_2_impl, input_file)
 }
 
 enum Direction {
@@ -19,8 +19,8 @@ enum Direction {
     Down(i32)
 }
 
-fn solve<R: Display>(func: fn(&Vec<Direction>) -> R, input_dir: &Path) -> Result<()> {
-    let res = func(&get_input(input_dir)?);
+fn solve<R: Display>(func: fn(&Vec<Direction>) -> R, input_file: &Path) -> Result<()> {
+    let res = func(&get_input(input_file)?);
     println!("\t{}", res);
     Ok(())
 }
@@ -40,8 +40,8 @@ fn parse_direction(s: &String) -> Result<Direction> {
     }
 }
 
-fn get_input(input_dir: &Path) -> Result<Vec<Direction>> {
-    let lines = utilities::get_input_lines(input_dir.join("2021").join("day_2_input.txt"))?;
+fn get_input(input_file: &Path) -> Result<Vec<Direction>> {
+    let lines = utilities::get_input_lines(input_file)?;
     lines.iter().map(|l| parse_direction(l)).collect()
 }
 

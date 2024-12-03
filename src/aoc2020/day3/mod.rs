@@ -13,8 +13,8 @@ const VALID_VALUES : [char; 2] = [OPEN_SPACE, TREE_SPACE];
 
 type Map = Vec<Vec<char>>;
 
-fn get_input(input_dir: &Path) -> Result<Map> {
-    let lines : Map = utilities::get_input_lines(input_dir.join("2020").join("day_3_input.txt"))?
+fn get_input(input_file: &Path) -> Result<Map> {
+    let lines : Map = utilities::get_input_lines(input_file)?
         .iter().map(|s| s.chars().collect()).collect();
     let line_len = lines.first().context("Cannot generate map without any lines.")?.len();
     if !lines.iter().all(|l| l.len() == line_len && l.iter().all(|c| VALID_VALUES.contains(c))) {
@@ -41,15 +41,15 @@ fn num_trees_in_path(map: &Map, mut pos: Position, vel: Velocity) -> i32 {
 }
 
 /************************* Part 1 *************************/
-pub fn solve_1(input_dir: &Path) -> Result<()> {
-    let map = get_input(input_dir)?;
+pub fn solve_1(input_file: &Path) -> Result<()> {
+    let map = get_input(input_file)?;
     println!("\t{}", num_trees_in_path(&map, Position::top_left(), Velocity{ dx: 3, dy: 1 }));
     Ok(())
 }
 
 /************************* Part 2 *************************/
-pub fn solve_2(input_dir: &Path) -> Result<()> {
-    let map = get_input(input_dir)?;
+pub fn solve_2(input_file: &Path) -> Result<()> {
+    let map = get_input(input_file)?;
     let pos = Position::top_left();
     let vels = [
         Velocity{ dx:1, dy: 1 },

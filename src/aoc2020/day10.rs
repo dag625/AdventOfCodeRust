@@ -3,8 +3,8 @@ use crate::utilities;
 use std::path::Path;
 use std::collections::HashMap;
 
-fn get_input(input_dir: &Path) -> Result<Vec<i32>> {
-    let lines = utilities::get_input_lines(input_dir.join("2020").join("day_10_input.txt"))?;
+fn get_input(input_file: &Path) -> Result<Vec<i32>> {
+    let lines = utilities::get_input_lines(input_file)?;
     lines.iter().map(|s| s.parse().with_context(|| format!("Failed to convert line '{}' to an integer.", s))).collect()
 }
 
@@ -45,8 +45,8 @@ fn count_paths(sorted: &Vec<i32>) -> i64 {
 }
 
 /************************* Part 1 *************************/
-pub fn solve_1(input_dir: &Path) -> Result<()> {
-    let mut data = get_input(input_dir)?;
+pub fn solve_1(input_file: &Path) -> Result<()> {
+    let mut data = get_input(input_file)?;
     data.sort();
     let (sum1s, sum3s) = count_diffs(&data);
     println!("\t{}", sum1s * sum3s);
@@ -54,8 +54,8 @@ pub fn solve_1(input_dir: &Path) -> Result<()> {
 }
 
 /************************* Part 2 *************************/
-pub fn solve_2(input_dir: &Path) -> Result<()> {
-    let mut data = get_input(input_dir)?;
+pub fn solve_2(input_file: &Path) -> Result<()> {
+    let mut data = get_input(input_file)?;
     data.sort();
     println!("\t{}", count_paths(&data));
     Ok(())

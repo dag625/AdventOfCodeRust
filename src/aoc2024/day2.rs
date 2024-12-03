@@ -1,25 +1,24 @@
 use std::fmt::Display;
 use std::path::Path;
 use anyhow::{Result, Context};
-use itertools::Itertools;
 use crate::utilities;
 
-pub fn solve_1(input_dir: &Path) -> Result<()> {
-    solve(crate::aoc2024::day2::solve_1_impl, input_dir)
+pub fn solve_1(input_file: &Path) -> Result<()> {
+    solve(crate::aoc2024::day2::solve_1_impl, input_file)
 }
 
-pub fn solve_2(input_dir: &Path) -> Result<()> {
-    solve(crate::aoc2024::day2::solve_2_impl, input_dir)
+pub fn solve_2(input_file: &Path) -> Result<()> {
+    solve(crate::aoc2024::day2::solve_2_impl, input_file)
 }
 
-fn solve<R: Display>(func: fn(&Vec<Vec<i32>>) -> R, input_dir: &Path) -> Result<()> {
-    let res = func(&get_input(input_dir)?);
+fn solve<R: Display>(func: fn(&Vec<Vec<i32>>) -> R, input_file: &Path) -> Result<()> {
+    let res = func(&get_input(input_file)?);
     println!("\t{}", res);
     Ok(())
 }
 
-fn get_input(input_dir: &Path) -> Result<Vec<Vec<i32>>> {
-    let lines = utilities::get_input_lines(input_dir.join("2024").join("day_2_input.txt"))?;
+fn get_input(input_file: &Path) -> Result<Vec<Vec<i32>>> {
+    let lines = utilities::get_input_lines(input_file)?;
     Ok(lines.iter().map(|l| l.split(' ')
         .filter(|&s| !s.is_empty())
         .map(|s| s.parse::<i32>().with_context(|| format!("Failed to convert line '{}' to i32.", s)).unwrap())

@@ -34,21 +34,21 @@ fn is_valid_new_job(entry: &PasswordEntry) -> bool {
     (c1 == entry.character && c2 != entry.character) || (c1 != entry.character && c2 == entry.character)
 }
 
-fn get_input(input_dir: &Path) -> Result<Vec<PasswordEntry>> {
-    let lines = utilities::get_input_lines(input_dir.join("2020").join("day_2_input.txt"))?;
+fn get_input(input_file: &Path) -> Result<Vec<PasswordEntry>> {
+    let lines = utilities::get_input_lines(input_file)?;
     lines.iter().map(|s| parse_password_entry(s).with_context(|| format!("Failed to convert line '{}' to a password entry.", s))).collect()
 }
 
 /************************* Part 1 *************************/
-pub fn solve_1(input_dir: &Path) -> Result<()> {
-    let res = get_input(input_dir)?.iter().filter(|e| is_valid_old_job(*e)).count();
+pub fn solve_1(input_file: &Path) -> Result<()> {
+    let res = get_input(input_file)?.iter().filter(|e| is_valid_old_job(*e)).count();
     println!("\t{}", res);
     Ok(())
 }
 
 /************************* Part 2 *************************/
-pub fn solve_2(input_dir: &Path) -> Result<()> {
-    let res = get_input(input_dir)?.iter().filter(|e| is_valid_new_job(*e)).count();
+pub fn solve_2(input_file: &Path) -> Result<()> {
+    let res = get_input(input_file)?.iter().filter(|e| is_valid_new_job(*e)).count();
     println!("\t{}", res);
     Ok(())
 }

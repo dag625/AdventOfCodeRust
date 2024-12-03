@@ -27,8 +27,8 @@ fn parse_seat(s: &String) -> Result<Seat> {
     Ok(Seat{ row: r, col: c})
 }
 
-fn get_input(input_dir: &Path) -> Result<Vec<Seat>> {
-    let lines = utilities::get_input_lines(input_dir.join("2020").join("day_5_input.txt"))?;
+fn get_input(input_file: &Path) -> Result<Vec<Seat>> {
+    let lines = utilities::get_input_lines(input_file)?;
     let retval : Result<Vec<Seat>> = lines.iter().map(|s| parse_seat(s).with_context(|| format!("Failed to convert line '{}' to a seat.", s))).collect();
     let mut retval = retval?;
     retval.sort_by(|a, b| a.seat_id().cmp(&b.seat_id()));
@@ -36,15 +36,15 @@ fn get_input(input_dir: &Path) -> Result<Vec<Seat>> {
 }
 
 /************************* Part 1 *************************/
-pub fn solve_1(input_dir: &Path) -> Result<()> {
-    let seats = get_input(input_dir)?;
+pub fn solve_1(input_file: &Path) -> Result<()> {
+    let seats = get_input(input_file)?;
     println!("\t{}", seats.last().ok_or(anyhow::Error::msg("No seats in list."))?.seat_id());
     Ok(())
 }
 
 /************************* Part 2 *************************/
-pub fn solve_2(input_dir: &Path) -> Result<()> {
-    let seats = get_input(input_dir)?;
+pub fn solve_2(input_file: &Path) -> Result<()> {
+    let seats = get_input(input_file)?;
     let mut next_id = seats.first().ok_or(anyhow::Error::msg("Empty list of seats."))?.seat_id();
     for s in seats {
         if next_id != s.seat_id() {

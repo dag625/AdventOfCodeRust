@@ -27,8 +27,8 @@ fn parse_instruction(s: &str) -> Result<Instruction> {
     }
 }
 
-fn get_input(input_dir: &Path) -> Result<Vec<Instruction>> {
-    let lines = utilities::get_input_lines(input_dir.join("2020").join("day_8_input.txt"))?;
+fn get_input(input_file: &Path) -> Result<Vec<Instruction>> {
+    let lines = utilities::get_input_lines(input_file)?;
     lines.iter().map(|s| parse_instruction(s).with_context(|| format!("Failed to convert line '{}' to an instruction.", s))).collect()
 }
 
@@ -91,15 +91,15 @@ fn fix_loop(instructions: &Vec<Instruction>) -> Result<i32> {
 }
 
 /************************* Part 1 *************************/
-pub fn solve_1(input_dir: &Path) -> Result<()> {
-    let instructions = get_input(input_dir)?;
+pub fn solve_1(input_file: &Path) -> Result<()> {
+    let instructions = get_input(input_file)?;
     println!("\t{}", accumulate_until_loop(&instructions)?.0);
     Ok(())
 }
 
 /************************* Part 2 *************************/
-pub fn solve_2(input_dir: &Path) -> Result<()> {
-    let instructions = get_input(input_dir)?;
+pub fn solve_2(input_file: &Path) -> Result<()> {
+    let instructions = get_input(input_file)?;
     println!("\t{}", fix_loop(&instructions)?);
     Ok(())
 }

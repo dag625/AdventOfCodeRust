@@ -4,22 +4,22 @@ use std::vec::Vec;
 use super::super::utilities;
 use anyhow::{Result, Context};
 
-pub fn solve_1(input_dir: &Path) -> Result<()> {
-    solve(solve_1_impl, input_dir)
+pub fn solve_1(input_file: &Path) -> Result<()> {
+    solve(solve_1_impl, input_file)
 }
 
-pub fn solve_2(input_dir: &Path) -> Result<()> {
-    solve(solve_2_impl, input_dir)
+pub fn solve_2(input_file: &Path) -> Result<()> {
+    solve(solve_2_impl, input_file)
 }
 
-fn solve<R: Display>(func: fn(&Vec<i32>) -> R, input_dir: &Path) -> Result<()> {
-    let res = func(&get_input(input_dir)?);
+fn solve<R: Display>(func: fn(&Vec<i32>) -> R, input_file: &Path) -> Result<()> {
+    let res = func(&get_input(input_file)?);
     println!("\t{}", res);
     Ok(())
 }
 
-fn get_input(input_dir: &Path) -> Result<Vec<i32>> {
-    let lines = utilities::get_input_lines(input_dir.join("2020").join("day_1_input.txt"))?;
+fn get_input(input_file: &Path) -> Result<Vec<i32>> {
+    let lines = utilities::get_input_lines(input_file)?;
     lines.iter().map(|s| s.parse().with_context(|| format!("Failed to convert line '{}' to i32.", s))).collect()
 }
 

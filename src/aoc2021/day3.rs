@@ -4,14 +4,14 @@ use std::vec::Vec;
 use super::super::utilities;
 use anyhow::Result;
 
-pub fn solve_1(input_dir: &Path) -> Result<()> { solve(solve_1_impl, input_dir) }
+pub fn solve_1(input_file: &Path) -> Result<()> { solve(solve_1_impl, input_file) }
 
-pub fn solve_2(input_dir: &Path) -> Result<()> {
-    solve(solve_2_impl, input_dir)
+pub fn solve_2(input_file: &Path) -> Result<()> {
+    solve(solve_2_impl, input_file)
 }
 
-fn solve<R: Display>(func: fn(&Vec<String>) -> R, input_dir: &Path) -> Result<()> {
-    let res = func(&get_input(input_dir)?);
+fn solve<R: Display>(func: fn(&Vec<String>) -> R, input_file: &Path) -> Result<()> {
+    let res = func(&get_input(input_file)?);
     println!("\t{}", res);
     Ok(())
 }
@@ -44,8 +44,8 @@ fn find_bit_criteria(data: &Vec<String>, prefix: &String, tie: char, use_ones: f
     find_bit_criteria(data, &new_prefix, tie, use_ones)
 }
 
-fn get_input(input_dir: &Path) -> Result<Vec<String>> {
-    utilities::get_input_lines(input_dir.join("2021").join("day_3_input.txt"))
+fn get_input(input_file: &Path) -> Result<Vec<String>> {
+    utilities::get_input_lines(input_file)
 }
 
 /************************* Part 1 *************************/

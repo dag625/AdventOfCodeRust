@@ -43,7 +43,7 @@ impl Challenge {
     pub fn run(&self, input_dir: &std::path::Path) {
         let start = Instant::now();
         println!("{}", self.to_string());
-        match (self.function)(input_dir) {
+        match (self.function)(input_dir.join(self.year.to_string()).join(format!("day_{}_input.txt", self.day)).as_path()) {
             Ok(()) => {},
             Err(err) => { println!("\t{} failed due to an error:  {}", self.to_string(), err); }
         };

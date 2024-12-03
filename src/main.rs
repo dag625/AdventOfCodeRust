@@ -91,7 +91,9 @@ const CHALLENGES: &[Challenge] = &[
     Challenge{ year: 2024, day: 1, num: 1, function: aoc2024::day1::solve_1},
     Challenge{ year: 2024, day: 1, num: 2, function: aoc2024::day1::solve_2},
     Challenge{ year: 2024, day: 2, num: 1, function: aoc2024::day2::solve_1},
-    Challenge{ year: 2024, day: 2, num: 2, function: aoc2024::day2::solve_2}
+    Challenge{ year: 2024, day: 2, num: 2, function: aoc2024::day2::solve_2},
+    Challenge{ year: 2024, day: 3, num: 1, function: aoc2024::day3::solve_1},
+    Challenge{ year: 2024, day: 3, num: 2, function: aoc2024::day3::solve_2}
 ];
 
 fn main_impl() -> std::result::Result<(), String> {
